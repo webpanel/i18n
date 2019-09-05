@@ -13,7 +13,9 @@ export const LanguagePicker = () => {
   return (
     <Translation>
       {(t, options) => {
-        const currentLanguage = languages.find(l => l.key === options.lng);
+        const currentLanguage = languages.find(
+          l => l.key === options.lng.split('-')[0]
+        );
         return (
           <Dropdown
             overlay={
@@ -21,7 +23,7 @@ export const LanguagePicker = () => {
                 onClick={value => {
                   options.i18n.changeLanguage(value.key);
                 }}
-                selectedKeys={[options.i18n.language]}
+                selectedKeys={currentLanguage && [currentLanguage.key]}
               >
                 {languages.map(l => (
                   <Menu.Item key={l.key}>
