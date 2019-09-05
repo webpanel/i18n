@@ -4,28 +4,45 @@ import { Dropdown, Icon, Menu } from 'antd';
 
 import { Translation } from 'react-i18next';
 
+const Flag = require('react-flagkit');
+
+const languages = [
+  { key: 'cs', icon: '🇨🇿', name: 'Česky' },
+  { key: 'en', icon: '🇬🇧', name: 'English' }
+];
+
 export const LanguagePicker = () => {
   return (
     <Translation>
-      {(t, options) => (
-        <Dropdown
-          overlay={
-            <Menu
-              onClick={value => {
-                options.i18n.changeLanguage(value.key);
-              }}
-              selectedKeys={[options.i18n.language]}
-            >
-              <Menu.Item key="cs">🇨🇿 Česky</Menu.Item>
-              <Menu.Item key="en">🇬🇧 English</Menu.Item>
-            </Menu>
-          }
-        >
-          <span className="antd-header-content-item">
-            <Icon type="global" />
-          </span>
-        </Dropdown>
-      )}
+      {(t, options) => {
+        const currentLanguage = languages.find(l => l.key === options.lng);
+        return (
+          <Dropdown
+            overlay={
+              <Menu
+                onClick={value => {
+                  options.i18n.changeLanguage(value.key);
+                }}
+                selectedKeys={[options.i18n.language]}
+              >
+                {languages.map(l => (
+                  <Menu.Item key={l.key}>
+                    <Flag country={l.key} /> {l.name}
+                  </Menu.Item>
+                ))}
+              </Menu>
+            }
+          >
+            <span className="antd-header-content-item">
+              {currentLanguage ? (
+                <Flag country={currentLanguage.key} />
+              ) : (
+                <Icon type="global" />
+              )}
+            </span>
+          </Dropdown>
+        );
+      }}
     </Translation>
   );
 };
