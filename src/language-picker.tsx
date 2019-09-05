@@ -4,7 +4,7 @@ import { Dropdown, Icon, Menu } from 'antd';
 
 import { Translation } from 'react-i18next';
 
-const Flag = require('react-flagkit');
+const Flag = require('react-flags').Flag;
 
 const languages = [
   { key: 'cs', icon: '🇨🇿', name: 'Česky' },

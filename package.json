@@ -14,6 +14,7 @@
     "inflection": "^1.12.0",
     "numeral": "^2.0.6",
     "react-flagkit": "^1.0.2",
+    "react-flags": "^0.1.18",
     "ts-thunk": "0.0.6"
   },
   "peerDependencies": {
