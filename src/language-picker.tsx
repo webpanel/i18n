@@ -4,8 +4,6 @@ import { Dropdown, Icon, Menu } from 'antd';
 
 import { Translation } from 'react-i18next';
 
-const Flag = require('react-flags').Flag;
-
 const languages = [
   { key: 'cs', icon: '🇨🇿', name: 'Česky' },
   { key: 'en', icon: '🇬🇧', name: 'English' }
@@ -27,7 +25,7 @@ export const LanguagePicker = () => {
               >
                 {languages.map(l => (
                   <Menu.Item key={l.key}>
-                    <Flag country={l.key} /> {l.name}
+                    {l.icon} {l.name}
                   </Menu.Item>
                 ))}
               </Menu>
@@ -35,7 +33,7 @@ export const LanguagePicker = () => {
           >
             <span className="antd-header-content-item">
               {currentLanguage ? (
-                <Flag country={currentLanguage.key} />
+                <span style={{ fontSize: 20 }}>{currentLanguage.icon}</span>
               ) : (
                 <Icon type="global" />
               )}
