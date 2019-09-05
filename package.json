@@ -1,5 +1,5 @@
 {
-  "name": "webpanel-files",
+  "name": "webpanel-i18n",
   "version": "0.0.1",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/webpanel/files.git"
+    "url": "https://github.com/webpanel/i18n.git"
   },
   "devDependencies": {
     "@types/graphql": "^14.2.3",
