@@ -1,7 +1,9 @@
-import Backend from 'i18next-xhr-backend';
+import Backend from 'i18next-chained-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import LocalStorageBackend from 'i18next-localstorage-backend';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import xhr from 'i18next-xhr-backend';
 
 export const i18nInitialize = (): i18n.i18n => {
   i18n
@@ -21,6 +23,18 @@ export const i18nInitialize = (): i18n.i18n => {
       returnObjects: true,
       saveMissing: true,
       // compatibilityJSON: 'v1',
+
+      backend: {
+        backends: [
+          LocalStorageBackend, // primary
+          xhr // fallback
+        ]
+        // backendOptions: [{
+        //   /* below options */
+        // }, {
+        //   loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
+        // }]
+      },
 
       interpolation: {
         escapeValue: false // not needed for react as it escapes by default
