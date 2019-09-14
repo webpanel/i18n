@@ -21,19 +21,22 @@ export const i18nInitialize = (): i18n.i18n => {
       fallbackLng: 'en',
       debug: true,
       returnObjects: true,
-      saveMissing: true,
+      saveMissing: false,
       // compatibilityJSON: 'v1',
 
       backend: {
         backends: [
           LocalStorageBackend, // primary
           xhr // fallback
+        ],
+        backendOptions: [
+          {
+            /* below options */
+          },
+          {
+            // loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
+          }
         ]
-        // backendOptions: [{
-        //   /* below options */
-        // }, {
-        //   loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
-        // }]
       },
 
       interpolation: {
