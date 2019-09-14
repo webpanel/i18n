@@ -31,7 +31,7 @@ export const i18nInitialize = (): i18n.i18n => {
         ],
         backendOptions: [
           {
-            /* below options */
+            expirationTime: 60 * 60 * 1000
           },
           {
             // loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
