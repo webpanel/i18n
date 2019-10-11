@@ -1,16 +1,16 @@
 import LocalStorageBackend, {
   I18NextLocalStorageBackend
 } from 'i18next-localstorage-backend';
+import i18n, { InitOptions } from 'i18next';
 
 import Backend from 'i18next-chained-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import xhr from 'i18next-xhr-backend';
 
-interface i18nInitializeOptions {
-  fallbackLng?: string;
-  debug?: boolean;
+interface i18nInitializeOptions extends InitOptions {
+  // fallbackLng?: string;
+  // debug?: boolean;
   localStorageBackend?: I18NextLocalStorageBackend.BackendOptions;
 }
 
@@ -27,11 +27,14 @@ export const i18nInitialize = (opts: i18nInitializeOptions = {}): i18n.i18n => {
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-      fallbackLng: opts.fallbackLng || 'en',
+      ...{
+        fallbackLng: 'en',
 
-      debug: opts.debug,
-      returnObjects: true,
-      saveMissing: false,
+        debug: false,
+        returnObjects: true,
+        saveMissing: false
+      },
+      ...opts,
       // compatibilityJSON: 'v1',
 
       backend: {
