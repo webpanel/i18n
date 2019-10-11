@@ -1,11 +1,20 @@
+import LocalStorageBackend, {
+  I18NextLocalStorageBackend
+} from 'i18next-localstorage-backend';
+
 import Backend from 'i18next-chained-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import LocalStorageBackend from 'i18next-localstorage-backend';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import xhr from 'i18next-xhr-backend';
 
-export const i18nInitialize = (): i18n.i18n => {
+interface i18nInitializeOptions {
+  fallbackLng?: string;
+  debug?: boolean;
+  localStorageBackend?: I18NextLocalStorageBackend.BackendOptions;
+}
+
+export const i18nInitialize = (opts: i18nInitializeOptions = {}): i18n.i18n => {
   i18n
     // load translation using xhr -> see /public/locales
     // learn more: https://github.com/i18next/i18next-xhr-backend
@@ -18,8 +27,9 @@ export const i18nInitialize = (): i18n.i18n => {
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-      fallbackLng: 'en',
-      debug: true,
+      fallbackLng: opts.fallbackLng || 'en',
+
+      debug: opts.debug,
       returnObjects: true,
       saveMissing: false,
       // compatibilityJSON: 'v1',
@@ -31,7 +41,8 @@ export const i18nInitialize = (): i18n.i18n => {
         ],
         backendOptions: [
           {
-            expirationTime: 60 * 60 * 1000
+            expirationTime: 60 * 60 * 1000,
+            ...opts.localStorageBackend
           },
           {
             // loadPath: '/locales/{{lng}}/{{ns}}.json' // xhr load path for my own fallback
