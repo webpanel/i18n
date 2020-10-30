@@ -1,12 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Dropdown, Icon, Menu } from 'antd';
+import { Dropdown, Menu } from "antd";
 
-import { Translation } from 'react-i18next';
+import { GlobalOutlined } from "@ant-design/icons";
+import { Translation } from "react-i18next";
 
 const languages = [
-  { key: 'cs', icon: '🇨🇿', name: 'Česky' },
-  { key: 'en', icon: '🇬🇧', name: 'English' }
+  { key: "cs", icon: "🇨🇿", name: "Česky" },
+  { key: "en", icon: "🇬🇧", name: "English" },
 ];
 
 export const LanguagePicker = () => {
@@ -14,18 +15,18 @@ export const LanguagePicker = () => {
     <Translation>
       {(t, options) => {
         const currentLanguage = languages.find(
-          l => l.key === options.lng.split('-')[0]
+          (l) => l.key === options.lng.split("-")[0]
         );
         return (
           <Dropdown
             overlay={
               <Menu
-                onClick={value => {
-                  options.i18n.changeLanguage(value.key);
+                onClick={(info) => {
+                  options.i18n.changeLanguage(info.key.toString());
                 }}
                 selectedKeys={currentLanguage && [currentLanguage.key]}
               >
-                {languages.map(l => (
+                {languages.map((l) => (
                   <Menu.Item key={l.key}>
                     {l.icon} {l.name}
                   </Menu.Item>
@@ -37,7 +38,7 @@ export const LanguagePicker = () => {
               {currentLanguage ? (
                 <span style={{ fontSize: 20 }}>{currentLanguage.icon}</span>
               ) : (
-                <Icon type="global" />
+                <GlobalOutlined />
               )}
             </span>
           </Dropdown>
